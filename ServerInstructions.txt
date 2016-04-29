@@ -1,0 +1,62 @@
+Billing
+
+Digital Ocean Billing
+1. Login to https://www.digitalocean.com/
+2. Click on the gear shaped button in the top left and go to "Settings"
+3. You can manage your billing info here. Please remember that a credit card must be added to the account at all times; otherwise the server will shut down almost immediatley.
+
+Namecheap Billing
+1. Login to https://www.namecheap.com/
+2. Hover over "yorktownfire" in the top left corner and navigate to "Dashboard"
+3. Once you are in the dashboard, click on "Profile" on the left.
+4. You can manage your personal information here.
+5. Click on the "Billing" tab on the left.
+6. You can manage your payments here.
+7. Navigate to "Domain List" on the left.
+8. You can view the expiration date of your domain here. Make sure to renew it before the date!
+
+Access Server Console:
+1. Go to http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html
+2. Download putty.exe and run it.
+3. Copy our server's IP address into the "Host Name (or IP address)" field. (Our IP is 162.243.8.101)
+4. Make sure it is set to "Port 22" and "SSH connection". (These are the defaults.)
+5. Press "Open" at the bottom of the screen. A black console window should pop up that reads "login as:"
+6. Type "root" and then push enter. The text "root@162.243.8.101 's password:" should appear.
+7. Enter the password. 
+   *IMPORTANT* 
+   The cursor will not respond. Even though it is working, you will have no visual feedback. 
+   Don't worry. It is not broken. This is just a security feature so people watching will not be able to count the number of characters in a password.
+8. After the password is fully entered, press enter.
+9. If you see the text "Access denied" or similar text, try a few more times. The lack of visual feedback makes it easy to make a mistake.
+10. Still not working? Try logging in to digital ocean's console.
+11. Sign in to https://www.digitalocean.com/ and navigate to the "Droplets" tab at the top of the screen.
+12. Click on our server: "ubuntu-512mb-nyc2-firescheduler"
+13. On the left there should be an "Access" tab. Click there.
+14. Click on the large blue button "Console Access"
+15. A window should pop up giving you root access to the console.
+16. If you are still unable to gain access to the system, contact your system administrator.
+
+Copying and Pasting using Putty
+1. To copy, left click and drag. When you release the cursor, the text will automatically be copied to your clipboard.
+2. To paste, right click. The content on your clipboard will be pasted at the selected location.
+3. Notes:
+    You can copy text from putty and paste it outside of putty.
+    You can copy text outside of putty and paste it into putty.
+    You can copy text from putty and paste it into putty.
+4. If you need to copy an entire file named fileName, try typing "cat fileName" and copying the output instead of opening it in an editor.
+5. Copy paste; easy as pie!
+
+Accessing the SQL database from the server
+1. Coming soon!
+
+Access the website from the server
+1. The website files are located in the directory /var/www/html. To get here type "cd /var/www/html"
+2. Coming soon!
+
+Navigate to Php.ini on the server
+1. Coming soon!
+
+Mailing on the server
+1. Coming soon!
+
+
