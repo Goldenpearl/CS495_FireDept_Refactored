@@ -1,14 +1,14 @@
 <?php
 
-FIREFIGHTER_CLASS_ID = 0;
-APPARATUS_CLASS_ID = 1;
-TIMESLOT_CLASS_ID = 2;
-USER_CLASS_ID = 3;
-SCHEDULE_TIMESLOT_CLASS_ID = 4;
-AVAILABLE_TIMESLOT_CLASS_ID = 5;
-MY_EVENT_CLASS_ID = 6;
-ASSIGNED_FIREFIGHTER_CLASS_ID = 7;
-ASSIGNED_APPARATUS_CLASS_ID = 8;
+$FIREFIGHTER_CLASS_ID = 0;
+$APPARATUS_CLASS_ID = 1;
+$TIMESLOT_CLASS_ID = 2;
+$USER_CLASS_ID = 3;
+$SCHEDULE_TIMESLOT_CLASS_ID = 4;
+$AVAILABLE_TIMESLOT_CLASS_ID = 5;
+$MY_EVENT_CLASS_ID = 6;
+$ASSIGNED_FIREFIGHTER_CLASS_ID = 7;
+$ASSIGNED_APPARATUS_CLASS_ID = 8;
 
 
 class Firefighter {
@@ -66,7 +66,7 @@ class Firefighter {
 	}
 
 	public function getJSON(){
-		return getInnerJSON();
+		return $this->getInnerJSON();
 	}
 	
 	public function getInnerJSON(){
@@ -93,7 +93,7 @@ class Firefighter {
 	}
 	
 	public static function getClassId(){
-		return FIREFIGHTER_CLASS_ID;
+		return $FIREFIGHTER_CLASS_ID;
 	}
 }
 
@@ -138,12 +138,12 @@ class Apparatus{
 	}
 	
 	public function getJSON(){
-		return getInnerJSON();
+		return $this->getInnerJSON();
 	}
 	
 	public function getInnerJSON(){
 		$arr = array('appartusId'=>$this->id, 'apparatusName'=>$this->name, 
-			'description'=>$this->description, 'numberOfSlots'=>$this->numberOfSlots;
+			'description'=>$this->description, 'numberOfSlots'=>$this->numberOfSlots);
 		$json = json_encode($arr);
 		return $json;
 	}
@@ -161,7 +161,7 @@ class Apparatus{
 	}
 	
 	public static function getClassId(){
-		return APPARATUS_CLASS_ID;
+		return $APPARATUS_CLASS_ID;
 	}
 }
 
@@ -199,7 +199,7 @@ class Timeslot{
 	}
 	
 	public function getJSON(){
-		return getInnerJSON();
+		return $this->getInnerJSON();
 	}
 	
 	public function getInnerJSON(){
@@ -220,12 +220,12 @@ class Timeslot{
 	}
 
 	public static function getClassId(){
-		return TIMESLOT_CLASS_ID;
+		return $TIMESLOT_CLASS_ID;
 	}
 }
 
 class User{
-	private $username
+	private $username;
 	private $pass;
 	private $firefighter;
 	function __construct($username, $pass, $firefighter){
@@ -257,7 +257,7 @@ class User{
 	}
 	
 	public function getJSON(){
-		return getInnerJSON();
+		return $this->getInnerJSON();
 	}
 	
 	public function getInnerJSON(){
@@ -294,13 +294,13 @@ class User{
 	}
 	
 	public static function getClassId(){
-		return USER_CLASS_ID;
+		return $USER_CLASS_ID;
 	}
 }
 
 class ScheduleTimeslot{
 	private $id;
-	private $firefighter
+	private $firefighter;
 	private $timeslot;
 	
 	function __construct($id, $firefighter, $timeslot){
@@ -332,7 +332,7 @@ class ScheduleTimeslot{
 	}
 	
 	public function getJSON(){
-		return getInnerJSON();
+		return $this->getInnerJSON();
 	}
 	
 	public function getInnerJSON(){
@@ -343,7 +343,7 @@ class ScheduleTimeslot{
 		'"Timeslot":'.
 		$this->timeslot->getJSON().
 		', "Firefighter":'.
-		$this->timeslot->getFirefighter()->getJSON().
+		$this->getFirefighter()->getJSON().
 		'}}';
 		return $str;
 	}
@@ -373,13 +373,13 @@ class ScheduleTimeslot{
 	}
 	
 	public static function getClassId(){
-		return SCHEDULE_TIMESLOT_CLASS_ID;
+		return $SCHEDULE_TIMESLOT_CLASS_ID;
 	}
 }
 
 class AvailableTimeslot{
 	private $id;
-	private $firefighter
+	private $firefighter;
 	private $timeslot;
 
 	function __construct($id, $firefighter, $timeslot){
@@ -411,7 +411,7 @@ class AvailableTimeslot{
 	}
 	
 	public function getJSON(){
-		return getInnerJSON();
+		return $this->getInnerJSON();
 	}
 	
 	public function getInnerJSON(){
@@ -451,7 +451,7 @@ class AvailableTimeslot{
 	}
 
 	public static function getClassId(){
-		return AVAILABLE_TIMESLOT_CLASS_ID;
+		return $this->$AVAILABLE_TIMESLOT_CLASS_ID;
 	}
 }
 
@@ -495,7 +495,7 @@ class MyEvent{
 	}	
 	
 	public function getJSON(){
-		return getInnerJSON();
+		return $this->getInnerJSON();
 	}
 	
 	public function getInnerJSON(){
@@ -532,7 +532,7 @@ class MyEvent{
 	}
 
 	public static function getClassId(){
-		return MY_EVENT_CLASS_ID;
+		return $MY_EVENT_CLASS_ID;
 	}
 }
 
@@ -578,7 +578,7 @@ class AssignedFirefighter{
 	}	
 	
 	public function getJSON(){
-		return getInnerJSON();
+		return $this->getInnerJSON();
 	}
 	
 	public function getInnterJSON(){
@@ -623,7 +623,7 @@ class AssignedFirefighter{
 	
 	
 	public static function getClassId(){
-		return ASSIGNED_FIREFIGHTER_CLASS_ID;
+		return $ASSIGNED_FIREFIGHTER_CLASS_ID;
 	}
 }
 
@@ -661,7 +661,7 @@ class AssignedApparatus{
 	}	
 	
 	public function getJSON(){
-		return getInnerJSON();
+		return $this->getInnerJSON();
 	}
 	
 	public function getInnerJSON(){
@@ -702,7 +702,7 @@ class AssignedApparatus{
 	}
 	
 	public static function getClassId(){
-		return ASSIGNED_APPARATUS_CLASS_ID;
+		return $ASSIGNED_APPARATUS_CLASS_ID;
 	}
 }
 ?>
