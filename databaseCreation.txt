@@ -35,7 +35,7 @@ CREATE TABLE scheduleTimeslot
 
 CREATE TABLE availableTimeslot
 (
- avaliableTimeslotId INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+ availableTimeslotId INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
  timeslotId int NOT NULL,
  firefighterId int NOT NULL
 );
@@ -235,16 +235,17 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE get_all_assigned_apparatus()
 BEGIN
-SELECT * FROM assignedApparatus JOIN (myEvent, apparatus) ON (myEvent.eventId = assignedApparatus.eventId AND apparatus.apparatusId=assignedApparatus.apparatusId);
+SELECT * FROM assignedApparatus JOIN (myEvent, apparatus, timeslot) ON (myEvent.timeslotId = timeslot.timeslotId AND myEvent.eventId = assignedApparatus.eventId AND apparatus.apparatusId=assignedApparatus.apparatusId);
 END //
 DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE get_all_assigned_firefighters()
 BEGIN
-SELECT * FROM assignedFirefighter JOIN (myEvent, firefighter) ON (myEvent.eventId = assignedFirefighter.eventId AND firefighter.firefighterId = assignedFirefighter.firefighterId);
+SELECT * FROM assignedFirefighter JOIN (myEvent, firefighter, timeslot) ON (myEvent.timeslotId=timeslot.timeslotId AND myEvent.eventId = assignedFirefighter.eventId AND firefighter.firefighterId = assignedFirefighter.firefighterId);
 END //
 DELIMITER ;
+
 
 DELIMITER //
 CREATE PROCEDURE get_all_available_timeslots_between(border_start_date DATETIME, border_end_date DATETIME)

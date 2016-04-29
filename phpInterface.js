@@ -8,30 +8,10 @@ MY_EVENT_CLASS_ID = 6;
 ASSIGNED_FIREFIGHTER_CLASS_ID = 7;
 ASSIGNED_APPARATUS_CLASS_ID = 8;
 
-function recieveScheduleJson() {	
-		var response1;
+function recieveJson(classId){
+	var response1;
 		var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "databaseInterface.php?id=" + SCHEDULE_TIMESLOT_CLASS_ID, false);
-        xmlhttp.send();
-		document.write(xmlhttp.responseText);
-		return xmlhttp.responseText;
-		//xmlhttp.close;
-}
-
-function recieveFirefighterJson() {	
-		var response1;
-		var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "databaseInterface.php?id=" + FIREFIGHTER_CLASS_ID, false);
-        xmlhttp.send();
-		document.write(xmlhttp.responseText);
-		return xmlhttp.responseText;
-		//xmlhttp.close;
-}
-
-function recieveEventsJson() {	
-		var response1;
-		var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "databaseInterface.php?id=" + MY_EVENT_CLASS_ID, false);
+        xmlhttp.open("GET", "databaseInterface.php?id=" + classId, false);
         xmlhttp.send();
 		document.write(xmlhttp.responseText);
 		return xmlhttp.responseText;
@@ -39,8 +19,14 @@ function recieveEventsJson() {
 }
 
 function test(){
-	 recieveEventsJson();
-	 recieveFirefighterJson();
+	 recieveJson(FIREFIGHTER_CLASS_ID);
+	 recieveJson(APPARATUS_CLASS_ID);
+	 recieveJson(USER_CLASS_ID);
+	 recieveJson(SCHEDULE_TIMESLOT_CLASS_ID);
+	 recieveJson(AVAILABLE_TIMESLOT_CLASS_ID);
+	 recieveJson(MY_EVENT_CLASS_ID);
+	 recieveJson(ASSIGNED_FIREFIGHTER_CLASS_ID);
+	 recieveJson(ASSIGNED_APPARATUS_CLASS_ID);
 }
 
 /*

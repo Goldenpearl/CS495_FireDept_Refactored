@@ -422,7 +422,7 @@ class AvailableTimeslot{
 		'"Timeslot":'.
 		$this->timeslot->getJSON().
 		', "Firefighter":'.
-		$this->timeslot->getFirefighter()->getJSON().
+		$this->getFirefighter()->getJSON().
 		'}}';
 		return $str;
 	}
@@ -546,7 +546,7 @@ class AssignedFirefighter{
 		$this->id = $id;
 		$this->firefighter = $firefighter;
 		$this->myEvent = $myEvent;
-		$this->$apparatusId;
+		$this->apparatusId = $apparatusId;
 	}
 	
 	public function getSummary(){
@@ -581,7 +581,7 @@ class AssignedFirefighter{
 		return $this->getInnerJSON();
 	}
 	
-	public function getInnterJSON(){
+	public function getInnerJSON(){
 		$str = '{"AssignedFirefighter": {'.
 		'"assignedFirefighterId": "'.
 		$this->id.
