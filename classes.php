@@ -263,12 +263,12 @@ class User{
 	public function getInnerJSON(){
 		$str = '{"User": {'.
 		'"username": "'.
-		$this->id.
+		$this->username.
 		'",'.
 		'"password": "'.
 		$this->pass.
 		', "Firefighter":'.
-		$this->timeslot->getFirefighter()->getJSON().
+		$this->getFirefighter()->getJSON().
 		'}}';
 		return $str;
 	}

@@ -68,6 +68,15 @@ CREATE TABLE apparatus(
  apparatusId int AUTO_INCREMENT NOT NULL PRIMARY KEY
 );
 
+
+DELIMITER //
+CREATE PROCEDURE user_insert (IN new_username varchar(50), new_pass varchar(20), firefighter_first_name varchar(30),firefighter_last_name varchar(30), firefighter_email varchar(50), firefighter_phone BIGINT, firefighter_secondary_phone BIGINT, firefighter_phone_provider varchar(30))
+BEGIN
+INSERT INTO firefighter(firstName, lastName, email, phone, secondaryPhone, phoneProvider, firefighterId) VALUES (firefighter_first_name, firefighter_last_name,firefighter_email, firefighter_phone, firefighter_secondary_phone, firefighter_phone_provider, NULL);
+INSERT INTO user(username, pass, firefighterId) VALUES (new_username, new_pass, LAST_INSERT_ID());
+END//
+DELIMITER ;
+
 DELIMITER //
 CREATE PROCEDURE firefighter_insert (IN firefighter_first_name varchar(30),firefighter_last_name varchar(30), firefighter_email varchar(50), firefighter_phone BIGINT, firefighter_secondary_phone BIGINT, firefighter_phone_provider varchar(30))
 BEGIN
@@ -283,6 +292,12 @@ CALL firefighter_insert("Ash", "Ketchum", "pikachu100@pokeball.com", NULL, NULL,
 CALL firefighter_insert("Misty", "Bubbles", "misty32453453@staryu.com", NULL, NULL, NULL);
 CALL firefighter_insert("Brock", "Rock", "brockkk@onyx.com", NULL, NULL, NULL);
 CALL firefighter_insert("May", "Ki", "torchic@blaziken.com", NULL, NULL, NULL);
+
+CALL user_insert("kblair", "4", "Kelly", "Blair", NULL, NULL, NULL, "att");
+CALL user_insert("ash", "34","Ash", "Ketchum", "pikachu100@pokeball.com", NULL, NULL, NULL);
+CALL user_insert("bubble", "3","Misty", "Bubbles", "misty32453453@staryu.com", NULL, NULL, NULL);
+CALL user_insert("brock", "3", "Brock", "Rock", "brockkk@onyx.com", NULL, NULL, NULL);
+CALL user_insert("b", "f", "May", "Ki", "torchic@blaziken.com", NULL, NULL, NULL);
 SELECT * FROM firefighter;
 
 Call schedule_timeslot_insert("2016-4-23 11:00:00", "2016-4-23 12:00:00", 1);
