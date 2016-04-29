@@ -3,11 +3,14 @@
 FIREFIGHTER_CLASS_ID = 0;
 APPARATUS_CLASS_ID = 1;
 TIMESLOT_CLASS_ID = 2;
-SCHEDULE_TIMESLOT_CLASS_ID = 3;
-AVAILABLE_TIMESLOT_CLASS_ID = 4;
-MY_EVENT_CLASS_ID = 5;
-ASSIGNED_FIREFIGHTER_CLASS_ID = 5;
-ASSIGNED_APPARATUS_CLASS_ID = 7;
+USER_CLASS_ID = 3;
+SCHEDULE_TIMESLOT_CLASS_ID = 4;
+AVAILABLE_TIMESLOT_CLASS_ID = 5;
+MY_EVENT_CLASS_ID = 6;
+ASSIGNED_FIREFIGHTER_CLASS_ID = 7;
+ASSIGNED_APPARATUS_CLASS_ID = 8;
+
+
 class Firefighter {
 	private $id = 0;
 	private $fName = "";
@@ -218,6 +221,80 @@ class Timeslot{
 
 	public static function getClassId(){
 		return TIMESLOT_CLASS_ID;
+	}
+}
+
+class User{
+	private $username
+	private $pass;
+	private $firefighter;
+	function __construct($username, $pass, $firefighter){
+		$this->username = $username;
+		$this->pass = $pass;
+		$this->firefighter = $firefighter;
+	}
+	
+	public function getSummary(){
+		return "User: <br>".
+		$this->username.
+		"Password: <br>".
+		$this->pass.
+		"<br><br> Firefighter:<br>".
+		$this->firefighter->getSummary().
+		"<br>";
+	}
+	
+	public function getUsername(){
+		return $this->username;
+	}	
+	
+	public function getPassword(){
+		return $this->pass;
+	}
+	
+	public function getFirefighter(){
+		return $this->firefighter;
+	}
+	
+	public function getJSON(){
+		return getInnerJSON();
+	}
+	
+	public function getInnerJSON(){
+		$str = '{"User": {'.
+		'"username": "'.
+		$this->id.
+		'",'.
+		'"password": "'.
+		$this->pass.
+		', "Firefighter":'.
+		$this->timeslot->getFirefighter()->getJSON().
+		'}}';
+		return $str;
+	}
+	
+	public static function getUserFromJson($json){
+		$data = json_decode($json, true);
+		$array = ($data["User"]);
+		$firefighterArray = $array["Firefighter"];
+		//var_dump($array, true);
+		
+		$username = $array["username"];
+		$pass = $array["password"];
+		$fName= $firefighterArray["firstName"];
+		$lName = $firefighterArray["lastName"];
+		$email= $firefighterArray["email"];
+		$phone = $firefighterArray["phone"];
+		$secondaryPhone = $firefighterArray["secondaryPhone"];
+		$carrier = $firefighterArray["carrier"];
+		$firefighterId = $firefighterArray["firefighterId"];
+		$firefighter = new Firefighter($firefighterId, $fName, $lName, $email, $phone, $secondaryPhone, $carrier);
+		$user = new User($username, $pass, $firefighter);
+		return $user;
+	}
+	
+	public static function getClassId(){
+		return USER_CLASS_ID;
 	}
 }
 
