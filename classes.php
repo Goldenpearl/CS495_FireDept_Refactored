@@ -504,7 +504,7 @@ class MyEvent{
 		$this->id.
 		'",'.
 		'"eventName": "'.
-		$this->name.
+		$this->eventName.
 		'",'.
 		'"eventDescription": "'.
 		$this->eventDescription.

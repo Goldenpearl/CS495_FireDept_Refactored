@@ -28,8 +28,19 @@ function recieveFirefighterJson() {
 		//xmlhttp.close;
 }
 
+function recieveEventsJson() {	
+		var response1;
+		var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "databaseInterface.php?id=" + MY_EVENT_CLASS_ID, false);
+        xmlhttp.send();
+		document.write(xmlhttp.responseText);
+		return xmlhttp.responseText;
+		//xmlhttp.close;
+}
+
 function test(){
-	 recieveScheduleJson();
+	 recieveEventsJson();
+	 recieveFirefighterJson();
 }
 
 /*
