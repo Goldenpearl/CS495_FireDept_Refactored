@@ -483,8 +483,50 @@ function insertAssignedFirefighter($assignedFirefighter){
 }
 
 function insertUser($user){
-//user_insert (IN new_username varchar(50), new_pass varchar(20), firefighter_first_name varchar(30),firefighter_last_name varchar(30), firefighter_email varchar(50), firefighter_phone BIGINT, firefighter_secondary_phone BIGINT, firefighter_phone_provider varchar(30))
-
+	$newUsername = $user->getUsername();
+	$newPass = $user->getPassword();
+	$firefighter = $user->getFirefighter();
+	$fname = $firefighter -> getFirstName();
+	$lname = $firefighter -> getLastName();
+	$email = $firefighter -> getEmail();
+	$phone = $firefighter -> getPhone();
+	$secondaryPhone = $firefighter ->getSecondaryPhone();
+	$carrier = $firefighter ->getCarrier();
+	$queryString = "call user_insert(" .
+	"'".
+	$newUsername.
+	"'".
+	", ".
+	"'".
+	$newPass.
+	"'".
+	", ".
+	"'".
+	$fname.
+	"'".
+	", ".
+	"'".
+	$lname.
+	"'".
+	", ".
+	"'".
+	$email.
+	"'".
+	", ".
+	"'".
+	$phone.
+	"'".
+	", ".
+	"'".
+	$secondaryPhone.
+	"'".
+	", ".
+	"'".
+	$carrier.
+	"'".
+	"); ";
+	$successfulAssignedFirefighterInsert = executeQueryString($queryString);
+	return $successfulAssignedFirefighterInsert;
 }
 
 function parseFirefighter($firefighterJson){
