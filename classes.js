@@ -72,8 +72,8 @@ function parseScheduleTimeslot(json){
 	var firefighter = new Firefighter(firefighterId, firstName, lastName, email, phone, secondaryPhone, carrier);
 
 	console.log(scheduleTimeslotOb);
-	//var scheduleTimeslot = new ScheduleTimeslot(scheduleTimeslotId, firefighter, timeslot);
-	//return scheduleTimeslot;
+	var scheduleTimeslot = new ScheduleTimeslot(scheduleTimeslotId, firefighter, timeslot);
+	return scheduleTimeslot;
 }
 function parseAvailableTimeslot(json){
 	var ob = JSON.parse(json);	
@@ -86,7 +86,7 @@ function parseAvailableTimeslot(json){
 	var endTime = timeslotOb.endTime;
 	var startTime = timeslotOb.startTime;
 	var timeslotId = timeslotOb.timeslotId;
-	//var timeslot = new Timeslot(timeslotId, startTime, endTime);
+	var timeslot = new Timeslot(timeslotId, startTime, endTime);
 	
 	var firefighterId = firefighterOb.firefighterId;
 	var firstName = firefighterOb.firstName;
@@ -98,8 +98,8 @@ function parseAvailableTimeslot(json){
 	var firefighter = new Firefighter(firefighterId, firstName, lastName, email, phone, secondaryPhone, carrier);
 
 	console.log(availableTimeslotOb);
-	//var availableTimeslot = new availableTimeslot(availableTimeslotId, firefighter, timeslot);
-	//return availableTimeslot;
+	var availableTimeslot = new availableTimeslot(availableTimeslotId, firefighter, timeslot);
+	return availableTimeslot;
 }
 function parseMyEvent(json){
 	var ob = JSON.parse(json);	
@@ -309,7 +309,7 @@ function Timeslot(timeslotId, startTime, endTime){
 	this.startTime=startTime;
 	this.endTime=endTime;
 	
-	this.getTimeslotID = function(){
+	this.getTimeslotId = function(){
 		return this.timeslotId;
 	}
 	this.getStartTime= function (){
@@ -320,7 +320,62 @@ function Timeslot(timeslotId, startTime, endTime){
 	}
 	
 	this.getSummary = function(){
-		return "Timeslot (ID: "+getTimeslotID()+", Start time: "+getStartTime()+", End time: "+getEndTime()+")";
+		return "Timeslot (ID: "+getTimeslotId()+", Start time: "+getStartTime()+", End time: "+getEndTime()+")";
+	}
+	//this.getJson = function(){
+		//return '{' +this.getNestedJson()+'}';			
+	//}
+	
+	//this.getNestedJson = function(){
+		//JSON.stringify(this);
+	//}
+}
+
+function ScheduleTimeslot(scheduleTimeslotId, firefighter, timeslot){
+	this.scheduleTimeslotId=scheduleTimeslotId;
+	this.startTime=firefighter;
+	this.timeslot=timeslot;
+	
+	this.getScheduleTimeslotId = function(){
+		return this.scheduleTimeslotId;
+	}
+	this.getFirefighter= function (){
+		return this.firefighter;
+	}
+	this.getTimeslot = function(){
+		return this.timeslot;
+	}
+	
+	this.getSummary = function(){
+		return "Schedule Timeslot (ID: "+getScheduleTimeslotId()+","+getFirefighter().getSummary()+", "+getTimeslot().getSummary()+")";
+	}
+	//this.getJson = function(){
+		//return '{' +this.getNestedJson()+'}';			
+	//}
+	
+	//this.getNestedJson = function(){
+		//JSON.stringify(this);
+	//}
+}
+
+
+function AvailableTimeslot(availableTimelotId, firefighter, timeslot){
+	this.availableTimelotId=availableTimelotId;
+	this.startTime=firefighter;
+	this.timeslot=timeslot;
+	
+	this.getAvailableTimeslotId = function(){
+		return this.availableTimelotId;
+	}
+	this.getFirefighter= function (){
+		return this.firefighter;
+	}
+	this.getTimeslot = function(){
+		return this.timeslot;
+	}
+	
+	this.getSummary = function(){
+		return "Available Timeslot (ID: "+getAvailableTimeslotId()+","+getFirefighter().getSummary()+", "+getTimeslot().getSummary()+")";
 	}
 	//this.getJson = function(){
 		//return '{' +this.getNestedJson()+'}';			
