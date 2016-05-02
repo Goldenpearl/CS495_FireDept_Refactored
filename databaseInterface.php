@@ -37,7 +37,7 @@ function executeQueryString($queryString)
 	if ($conn->query($queryString) === TRUE) 
 	{
 		//echo "<br>New record created successfully<br>";
-		$success=true;
+		$success = true;
 	} 	
 	else 
 	{
@@ -415,11 +415,11 @@ function insertAvailableTimeslot($availableTimeslot){
 	"'".
 	", ".
 	"'".
-	$firefighterID.
+	$firefighterId.
 	"'".
-	"); ";
-	$successfulEventInsert = executeQueryString($queryString);
-	return $successfulEventInsert;
+	"); ";	
+	$successfulAvailableTimeslotInsert = executeQueryString($queryString);
+	return $successfulSAvailableTimeslotInsert;
 }
 function insertEvent($myEvent){
 	$eventName=$myEvent->getEventName();
@@ -600,41 +600,43 @@ else if($operationId==1){
 	$json =  $_REQUEST["json"];
 	if($id == $FIREFIGHTER_CLASS_ID){
 		$firefighter = parseFirefighter($json);
+		echo($firefighter->getSummary());
 		$success = insertFirefighter($firefighter);
 	}
 	else if ($id==$APPARATUS_CLASS_ID){
 		$apparatus = parseApparatus($json);
-		//$success = insertApparatus($apparatus);
+		echo($apparatus->getSummary());
+		$success = insertApparatus($apparatus);
 	}
 	else if ($id==$USER_CLASS_ID){
 		$user = parseUser($json);
 		echo($user->getSummary());
-		//$success = insertUser($user);
+		$success = insertUser($user);
 	}
 	else if ($id==$SCHEDULE_TIMESLOT_CLASS_ID){
 		$scheduleTimeslot = parseScheduleTimeslot($json);
 		echo($scheduleTimeslot->getSummary());
-		//$success = insertScheduleTimeslot($scheduleTimeslot);
+		$success = insertScheduleTimeslot($scheduleTimeslot);
 	}
 	else if ($id==$AVAILABLE_TIMESLOT_CLASS_ID){
 		$availableTimeslot = parseAvailableTimeslot($json);
 		echo($availableTimeslot->getSummary());
-		//$success = insertAvailableTimeslot($availableTimeslot);
+		$success = insertAvailableTimeslot($availableTimeslot);
 	}
 	else if ($id==$MY_EVENT_CLASS_ID){
 		$myEvent = parseEvent($json);
 		echo($myEvent->getSummary());
-		//$success = insertEvent($myEvent);
+		$success = insertEvent($myEvent);
 	}
 	else if ($id==$ASSIGNED_FIREFIGHTER_CLASS_ID){
 		$assignedFirefighter = parseAssignedFirefighter($json);
 		echo($assignedFirefighter->getSummary());
-		//$success = insertFirefighter($assignedFirefighter);
+		$success = insertAssignedFirefighter($assignedFirefighter);
 	}
 	else if ($id==$ASSIGNED_APPARATUS_CLASS_ID){
 		$assignedApparatus = parseAssignedApparatus($json);
 		echo($assignedApparatus->getSummary());
-		//$success = insertAssignedApparatus($assignedApparatus);
+		$success = insertAssignedApparatus($assignedApparatus);
 	}
 }
 
