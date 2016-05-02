@@ -17,14 +17,14 @@ function parseFirefighter(json){
 function parseApparatus(json){
 	var ob = JSON.parse(json);	
 	var apparatusOb = ob["Apparatus"];
-	var appartusId = apparatusOb.appartusId;
+	var apparatusId = apparatusOb.apparatusId;
     var apparatusName = apparatusOb.apparatusName;
 	var description = apparatusOb.description;
 	var numberOfSlots = apparatusOb.numberOfSlots;
 	console.log(apparatusOb);
 	
-	//var apparatus = new Apparatus(apparatusId, apparatusName, apparatusDescription, numberOfSlots);
-	//return apparatus;
+	var apparatus = new Apparatus(apparatusId, apparatusName, description, numberOfSlots);
+	return apparatus;
 }
 
 function parseUser(json){
@@ -45,8 +45,8 @@ function parseUser(json){
 	var firefighter = new Firefighter(firefighterId, firstName, lastName, email, phone, secondaryPhone, carrier);
 
 	console.log(userOb);
-	//var user = new User(username, pass, firefighter);
-	//return user;
+	var user = new User(username, pass, firefighter);
+	return user;
 }
 
 function parseScheduleTimeslot(json){
@@ -60,7 +60,7 @@ function parseScheduleTimeslot(json){
 	var endTime = timeslotOb.endTime;
 	var startTime = timeslotOb.startTime;
 	var timeslotId = timeslotOb.timeslotId;
-	//var timeslot = new Timeslot(timeslotId, startTime, endTime);
+	var timeslot = new Timeslot(timeslotId, startTime, endTime);
 	
 	var firefighterId = firefighterOb.firefighterId;
 	var firstName = firefighterOb.firstName;
@@ -235,6 +235,92 @@ function Firefighter(firefighterId, firstName, lastName, email, phone, secondary
 	
 	this.getSummary = function(){
 		return "Firefighter ("+firefighterId+", "+firstName+", "+lastName+")";
+	}
+	//this.getJson = function(){
+		//return '{' +this.getNestedJson()+'}';			
+	//}
+	
+	//this.getNestedJson = function(){
+		//JSON.stringify(this);
+	//}
+}
+
+function Apparatus(apparatusId, apparatusName, apparatusDescription, numberOfSlots){
+	this.apparatusId=apparatusId;
+	this.apparatusName=apparatusName;
+	this.apparatusDescription=apparatusDescription;
+	this.numberOfSlots=numberOfSlots;
+	
+	this.getApparatusId = function(){
+		return this.apparatusId;
+	}
+	this.getApparatusDescription = function (){
+		return this.apparatusDescription;
+	}
+	this.getNumberOfSlots = function(){
+		return this.numberOfSlots;
+	}
+	this.getApparatusName = function(){
+		return this.apparatusName;
+	}
+	
+	this.getSummary = function(){
+		return "Apparatus (Id: "+getApparatusId()+", Name: "+getApparatusName()+", Slots: "+getNumberOfSlots()+")";
+	}
+	//this.getJson = function(){
+		//return '{' +this.getNestedJson()+'}';			
+	//}
+	
+	//this.getNestedJson = function(){
+		//JSON.stringify(this);
+	//}
+}
+
+
+function User(username, pass, firefighter){
+	this.username=username;
+	this.pass=pass;
+	this.firefighter=firefighter;
+	
+	this.getUsername = function(){
+		return this.username;
+	}
+	this.getPassword = function (){
+		return this.pass;
+	}
+	this.getFirefighter = function(){
+		return this.firefighter;
+	}
+	
+	this.getSummary = function(){
+		return "User (Username: "+getUsername()+", Password: "+getPassword()+", Firefighter: "+getFirefighter().getSummary()+")";
+	}
+	//this.getJson = function(){
+		//return '{' +this.getNestedJson()+'}';			
+	//}
+	
+	//this.getNestedJson = function(){
+		//JSON.stringify(this);
+	//}
+}
+
+function Timeslot(timeslotId, startTime, endTime){
+	this.timeslotId=timeslotId;
+	this.startTime=startTime;
+	this.endTime=endTime;
+	
+	this.getTimeslotID = function(){
+		return this.timeslotId;
+	}
+	this.getStartTime= function (){
+		return this.startTime;
+	}
+	this.getEndTime = function(){
+		return this.endTime;
+	}
+	
+	this.getSummary = function(){
+		return "Timeslot (ID: "+getTimeslotID()+", Start time: "+getStartTime()+", End time: "+getEndTime()+")";
 	}
 	//this.getJson = function(){
 		//return '{' +this.getNestedJson()+'}';			
