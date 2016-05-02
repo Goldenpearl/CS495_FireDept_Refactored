@@ -319,7 +319,7 @@ class ScheduleTimeslot{
 		"<br>";
 	}
 	
-	public function getScheduleTimeslotId(){
+	public function getId(){
 		return $this->id;
 	}	
 	
@@ -398,7 +398,7 @@ class AvailableTimeslot{
 		"<br>";
 	}
 	
-	public function getAvailableTimeslotId(){
+	public function getId(){
 		return $this->id;
 	}	
 	
@@ -482,7 +482,7 @@ class MyEvent{
 		return $this->timeslot;
 	}
 	
-	public function getEventId(){
+	public function getId(){
 		return $this->id;
 	}	
 	
@@ -561,7 +561,7 @@ class AssignedFirefighter{
 		"<br>";
 	}
 	
-	public function getAssignedFirefighterId(){
+	public function getId(){
 		return $this->id;
 	}
 		
@@ -648,7 +648,7 @@ class AssignedApparatus{
 		"<br>";
 	}
 
-	public function getAssignedApparatusId(){
+	public function getId(){
 		return $this->id;
 	}	
 	
