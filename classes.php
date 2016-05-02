@@ -471,8 +471,6 @@ class AvailableTimeslot{
 	}
 }
 
-//TEST JSON PARSE
-//TEST JSON ENCODE
 class MyEvent{
 	private $id;
 	private $eventName;
@@ -548,8 +546,6 @@ class MyEvent{
 	}
 }
 
-//TEST JSON PARSE
-//TEST JSON ENCODE
 class AssignedFirefighter{
 	private $id;
 	private $firefighter;
@@ -569,9 +565,9 @@ class AssignedFirefighter{
 		"<br><br>Apparatus Id: <br>".
 		$this->apparatusId.
 		"<br><br> Firefighter:<br>".
-		$this->firefighter->getSummary().
+		$this->getFirefighter()->getSummary().
 		"<br><br> Event:";
-		$this->myEvent->getSummary().
+		$this->getEvent()->getSummary().
 		"<br>";
 	}
 	
@@ -598,27 +594,26 @@ class AssignedFirefighter{
 	public function getJSONArray(){
 		$firefighterArray = $this->getFirefighter()->getJSONArray();
 		$eventArray = $this->getEvent()->getJSONArray();
-		$arr = ["assignedFirefighterId"=>$this->id, "assignedApparatusId"=>$this->apparatusId, "Firefighter"=>$firefighterArray, "MyEvent"=>$eventArray];
+		$arr = ["assignedFirefighterId"=>$this->id, "apparatusId"=>$this->apparatusId, "Firefighter"=>$firefighterArray, "MyEvent"=>$eventArray];
 		return $arr;
 	}
 
 	public function getInnerJSON(){
 		$arr = $this->getJSONArray();
-		$json = '"MyEvent":'.json_encode($arr);
+		$json = '"AssignedFirefighter":'.json_encode($arr);
 		return $json;
 	}
 
 	public static function getAssignedFirefighterFromJson($json){
 		$data = json_decode($json, true);
-		$array = ($data["AssignedFirefighter"]);
-		$timeslotArray = $array["Timeslot"];
-		$firefighterArray = $timeslotArray["Firefighter"];
+		$array = $data["AssignedFirefighter"];
+		$eventArray = $array["MyEvent"];
+		$firefighterArray = $array["Firefighter"];
+		$timeslotArray = $eventArray["Timeslot"];
 		//var_dump($array, true);
+		$assignedFirefighterId = $array["assignedFirefighterId"];
+		$apparatusId = $array["apparatusId"];
 		
-		$scheduleTimeslotId = $array["scheduleTimeslotId"];
-		$startTime= $timeslotArray["startTime"];
-		$endTime = $timeslotArray["endTime"];
-		$timeslotId = $timeslotArray["timeslotId"];
 		$fName= $firefighterArray["firstName"];
 		$lName = $firefighterArray["lastName"];
 		$email= $firefighterArray["email"];
@@ -627,9 +622,19 @@ class AssignedFirefighter{
 		$carrier = $firefighterArray["carrier"];
 		$firefighterId = $firefighterArray["firefighterId"];
 		$firefighter = new Firefighter($firefighterId, $fName, $lName, $email, $phone, $secondaryPhone, $carrier);
-		$timeslot = new Timeslot($timeslotId, $startTime, $endTime, $firefighter);
-		$scheduleTimeslot = new ScheduleTimeslot($timeslot, $scheduleTimeslotId);
-		return $scheduleTimeslot;
+
+		$startTime= $timeslotArray["startTime"];
+		$endTime = $timeslotArray["endTime"];
+		$timeslotId = $timeslotArray["timeslotId"];
+		$timeslot = new Timeslot($timeslotId, $startTime, $endTime);
+
+		$eventId = $eventArray["eventId"];
+		$eventDescription = $eventArray["eventDescription"];
+		$eventName = $eventArray["eventName"];
+		$myEvent = new MyEvent($eventId, $eventName, $eventDescription, $timeslot);
+		$assignedFirefighter = new AssignedFirefighter($assignedFirefighterId, $firefighter, $myEvent, $apparatusId);
+		$assignedFirefighter->getSummary();
+		return $assignedFirefighter;
 	}
 	
 	
@@ -679,7 +684,7 @@ class AssignedApparatus{
 	public function getJSONArray(){
 		$apparatusArray = $this->getApparatus()->getJSONArray();
 		$eventArray = $this->getEvent()->getJSONArray();
-		$arr = ["assignedApparatusId"=>$this->id, "apparatus"=>$apparatusArray, "MyEvent"=>$eventArray];
+		$arr = ["assignedApparatusId"=>$this->id, "Apparatus"=>$apparatusArray, "MyEvent"=>$eventArray];
 		return $arr;
 	}
 
@@ -691,27 +696,31 @@ class AssignedApparatus{
 
 	public static function getAssignedApparatusFromJson($json){
 		$data = json_decode($json, true);
-		$array = ($data["AssignedApparatus"]);
-		$myEventArray = $array["MyEvent"];
-		$timeslotArray = $myEventArray["Timeslot"];
-		$apparatusArray = $timeslotArray["Apparatus"];
+		$array = $data["AssignedApparatus"];
+		$eventArray = $array["MyEvent"];
+		$timeslotArray = $eventArray["Timeslot"];
+		$apparatusArray = $array["Apparatus"];
 		//var_dump($array, true);
 		$assignedApparatusId = $array["assignedApparatusId"];
-		$eventId = $myEventArray["eventId"];
-		$eventDescription = $myEventArray["eventDescription"];
-		$eventName = $myEventArray["eventName"];
+		
 		$startTime= $timeslotArray["startTime"];
 		$endTime = $timeslotArray["endTime"];
 		$timeslotId = $timeslotArray["timeslotId"];
 		$timeslot = new Timeslot($timeslotId, $startTime, $endTime);
-		$event = new MyEvent($eventId, $eventName, $eventDescription, $timeslot);
-		$apparatusId= $apparatusArray["appartusId"];
+
+		$eventId = $eventArray["eventId"];
+		$eventDescription = $eventArray["eventDescription"];
+		$eventName = $eventArray["eventName"];
+		$myEvent = new MyEvent($eventId, $eventName, $eventDescription, $timeslot);
+
+		$id= $apparatusArray["appartusId"];
 		$apparatusName = $apparatusArray["apparatusName"];
 		$description = $apparatusArray["description"];
 		$numberOfSlots= $apparatusArray["numberOfSlots"];
-		$apparatus = new Apparatus($apparatusId, $apparatusName, $description, $numberOfSlots);
-		$assignedApparatus = new AssignedApparatus($assignedApparatusId, $event, $apparatus);
-		return $assignedAppartus;
+		$apparatus = new Apparatus($id, $apparatusName, $description, $numberOfSlots);
+
+		$assignedApparatus = new AssignedApparatus($assignedApparatusId, $myEvent, $apparatus);
+		return $assignedApparatus;
 	}
 	
 	public static function getClassId(){
