@@ -155,7 +155,32 @@ function parseAssignedFirefighter(json){
 }
 
 function parseAssignedApparatus(json){
+	var ob = JSON.parse(json);	
+	var assignedApparatusOb = ob["AssignedApparatus"];	
+	var apparatusOb = assignedApparatusOb["Apparatus"];
+	var myEventOb = assignedApparatusOb["MyEvent"];
+	var timeslotOb = myEventOb["Timeslot"];
 
+	var assignedApparatusId = assignedApparatusOb.assignedApparatusId
+
+	var appartusId = apparatusOb.appartusId;
+    var apparatusName = apparatusOb.apparatusName;
+	var description = apparatusOb.description;
+	var numberOfSlots = apparatusOb.numberOfSlots;
+	//var apparatus = new Apparatus(apparatusId, apparatusName, apparatusDescription, numberOfSlots);
+
+	var endTime = timeslotOb.endTime;
+	var startTime = timeslotOb.startTime;
+	var timeslotId = timeslotOb.timeslotId;
+	//var timeslot = new Timeslot(timeslotId, startTime, endTime);
+	
+	var eventId = myEventOb.eventId
+	var eventName = myEventOb.eventName
+	var eventDescription = myEventOb.eventDescription
+	//var myEvent = new MyEvent(eventId, eventName, eventDescription, timeslot);
+
+	console.log(assignedApparatusOb);
+	//var assignedAppartus = new AssignedApparatus(assignedApparatusId, myEvent, apparatus);
 }
 
 function Firefighter(firefighterId, firstName, lastName, email, phone, secondaryPhone, carrier){

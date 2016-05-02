@@ -44,8 +44,8 @@ function test(){
 	//var scheduleTimeslot = grabFromDatabase(SCHEDULE_TIMESLOT_CLASS_ID);
 	//var availableTimeslot = grabFromDatabase(AVAILABLE_TIMESLOT_CLASS_ID);
 	//var myEvent = grabFromDatabase(MY_EVENT_CLASS_ID);
-	var assignedFirefighter = grabFromDatabase(ASSIGNED_FIREFIGHTER_CLASS_ID);
-	//var assignedApparatus= grabFromDatabase(ASSIGNED_APPARATUS_CLASS_ID);
+	//var assignedFirefighter = grabFromDatabase(ASSIGNED_FIREFIGHTER_CLASS_ID);
+	var assignedApparatus= grabFromDatabase(ASSIGNED_APPARATUS_CLASS_ID);
 	//Bugs: ' causes query to not work
 	//change procedure to only insert firefighter if user is also inserted
 	//submits query twice: could be refresh issue
