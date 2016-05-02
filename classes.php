@@ -102,6 +102,7 @@ class Firefighter {
 	}
 }
 
+//TEST JSON PARSE
 class Apparatus{
 	private $id = 0;
 	private $name = "";
@@ -175,6 +176,7 @@ class Apparatus{
 	}
 }
 
+//TEST JSON PARSE
 class Timeslot{
 	private $timeslotId;
 	private $startTime;
@@ -239,6 +241,7 @@ class Timeslot{
 	}
 }
 
+//TEST JSON PARSE
 class User{
 	private $username;
 	private $pass;
@@ -282,17 +285,6 @@ class User{
 	}
 
 	public function getInnerJSON(){
-		/*$str = '"User": {'.
-		'"username": "'.
-		$this->username.
-		'",'.
-		'"password": "'.
-		$this->pass.
-		', "Firefighter":'.
-		$this->getFirefighter()->getInnerJSON().
-		'}';
-		return $this->getFoundationalJson();
-		//return $str;*/
 		$arr = $this->getJSONArray();
 		$json = '"User":'.json_encode($arr);
 		return $json;
@@ -323,6 +315,7 @@ class User{
 	}
 }
 
+//TEST JSON PARSE
 class ScheduleTimeslot{
 	private $id;
 	private $firefighter;
@@ -359,18 +352,18 @@ class ScheduleTimeslot{
 	public function getJSON(){
 		return "{".$this->getInnerJSON()."}";
 	}
+
+	public function getJSONArray(){
+		$firefighterArray = $this->getFirefighter()->getJSONArray();
+		$timeslotArray = $this->getTimeslot()->getJSONArray();
+		$arr = ["scheduleTimeslotId"=>$this->id, "Timeslot"=>$timeslotArray, "Firefighter"=>$firefighterArray];
+		return $arr;
+	}
 	
 	public function getInnerJSON(){
-		$str = '"ScheduleTimeslot": {'.
-		'"scheduleTimeslotId": "'.
-		$this->id.
-		'",'.
-		'"Timeslot":'.
-		$this->timeslot->getInnerJSON().
-		', "Firefighter":'.
-		$this->getFirefighter()->getInnerJSON().
-		'}';
-		return $str;
+		$arr = $this->getJSONArray();
+		$json = '"ScheduleTimeslot":'.json_encode($arr);
+		return $json;
 	}
 	
 	public static function getScheduleTimeslotFromJson($json){
@@ -402,6 +395,7 @@ class ScheduleTimeslot{
 	}
 }
 
+//TEST JSON PARSE
 class AvailableTimeslot{
 	private $id;
 	private $firefighter;
@@ -432,24 +426,24 @@ class AvailableTimeslot{
 	}
 	
 	public function getTimeslot(){
-		return "{".$this->getInnerJSON()."}";
+		return $this->timeslot;
 	}
 	
 	public function getJSON(){
-		return $this->getInnerJSON();
+		return "{".$this->getInnerJSON()."}";
+	}
+
+	public function getJSONArray(){
+		$firefighterArray = $this->getFirefighter()->getJSONArray();
+		$timeslotArray = $this->getTimeslot()->getJSONArray();
+		$arr = ["availableTimeslotId"=>$this->id, "Timeslot"=>$timeslotArray, "Firefighter"=>$firefighterArray];
+		return $arr;
 	}
 	
 	public function getInnerJSON(){
-		$str = '"AvailableTimeslot": {'.
-		'"availableTimeslotId": "'.
-		$this->id.
-		'",'.
-		'"Timeslot":'.
-		$this->timeslot->getInnerJSON().
-		', "Firefighter":'.
-		$this->getFirefighter()->getInnerJSON().
-		'}';
-		return $str;
+		$arr = $this->getJSONArray();
+		$json = '"AvailableTimeslot":'.json_encode($arr);
+		return $json;
 	}
 	
 	public static function getAvailableTimeslotFromJson($json){
@@ -480,6 +474,8 @@ class AvailableTimeslot{
 	}
 }
 
+//TEST JSON PARSE
+//TEST JSON ENCODE
 class MyEvent{
 	private $id;
 	private $eventName;
@@ -522,22 +518,16 @@ class MyEvent{
 	public function getJSON(){
 		return "{".$this->getInnerJSON()."}";
 	}
-	
+	public function getJSONArray(){
+		$timeslotArray = $this->getTimeslot()->getJSONArray();
+		$arr = ["eventId"=>$this->id, "eventName"=>$this->eventName, "eventDescription"=>$this->eventDescription, "Timeslot"=>$timeslotArray];
+		return $arr;
+	}
+
 	public function getInnerJSON(){
-		$str = '"MyEvent": {'.
-		'"eventId": "'.
-		$this->id.
-		'",'.
-		'"eventName": "'.
-		$this->eventName.
-		'",'.
-		'"eventDescription": "'.
-		$this->eventDescription.
-		'",'.
-		'"Timeslot":'.
-		$this->timeslot->getJSON().
-		'}';
-		return $str;
+		$arr = $this->getJSONArray();
+		$json = '"MyEvent":'.json_encode($arr);
+		return $json;
 	}
 	
 	public static function getMyEventFromJson($json){
@@ -561,6 +551,8 @@ class MyEvent{
 	}
 }
 
+//TEST JSON PARSE
+//TEST JSON ENCODE
 class AssignedFirefighter{
 	private $id;
 	private $firefighter;
@@ -606,22 +598,19 @@ class AssignedFirefighter{
 		return "{".$this->getInnerJSON()."}";
 	}
 	
-	public function getInnerJSON(){
-		$str = '"AssignedFirefighter": {'.
-		'"assignedFirefighterId": "'.
-		$this->id.
-		'",'.
-		'"assignedApparatusId": "'.
-		$this->apparatusId.
-		'",'.
-		'"Firefighter":'.
-		$this->firefighter->getJSON().
-		', "MyEvent":'.
-		$this->myEvent->getJSON().
-		'}';
-		return $str;
+	public function getJSONArray(){
+		$firefighterArray = $this->getFirefighter()->getJSONArray();
+		$eventArray = $this->getEvent()->getJSONArray();
+		$arr = ["assignedFirefighterId"=>$this->id, "assignedApparatusId"=>$this->apparatusId, "Firefighter"=>firefighterArray, "MyEvent"=>$eventArray];
+		return $arr;
 	}
-	
+
+	public function getInnerJSON(){
+		$arr = $this->getJSONArray();
+		$json = '"MyEvent":'.json_encode($arr);
+		return $json;
+	}
+
 	public static function getAssignedFirefighterFromJson($json){
 		$data = json_decode($json, true);
 		$array = ($data["AssignedFirefighter"]);
@@ -652,6 +641,8 @@ class AssignedFirefighter{
 	}
 }
 
+//TEST JSON PARSE
+//TEST JSON ENCODE
 class AssignedApparatus{
 	private $id;
 	private $myEvent;
@@ -688,18 +679,17 @@ class AssignedApparatus{
 	public function getJSON(){
 		return "{".$this->getInnerJSON()."}";
 	}
-	
+	public function getJSONArray(){
+		$apparatusArray = $this->getApparatus()->getJSONArray();
+		$eventArray = $this->getEvent()->getJSONArray();
+		$arr = ["assignedApparatusId"=>$this->id, "apparatus"=>$this->apparatusArray, "Firefighter"=>firefighterArray, "MyEvent"=>$eventArray];
+		return $arr;
+	}
+
 	public function getInnerJSON(){
-		$str = '"AssignedApparatus": {'.
-		'"scheduleTimeslotId": "'.
-		$this->id.
-		'",'.
-		'"Apparatus":'.
-		$this->apparatus->getJSON().
-		', "MyEvent":'.
-		$this->myEvent->getJSON().
-		'}';
-		return $str;
+		$arr = $this->getJSONArray();
+		$json = '"AssignedApparatus":'.json_encode($arr);
+		return $json;
 	}
 
 	public static function getAssignedApparatusFromJson($json){
