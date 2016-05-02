@@ -38,14 +38,14 @@ function test(){
 	 recieveJson(MY_EVENT_CLASS_ID);
 	 recieveJson(ASSIGNED_FIREFIGHTER_CLASS_ID);
 	 recieveJson(ASSIGNED_APPARATUS_CLASS_ID);
-	 sendJson(FIREFIGHTER_CLASS_ID, '{"Firefighter":{"firefighterId":"10","firstName":"May","lastName":"Ki","email":"torchic@blaziken.com","phone":null,"secondaryPhone":null,"carrier":null}}');
-	 sendJson(APPARATUS_CLASS_ID, '{"Apparatus":{"appartusId":"1","apparatusName":"Big Truck","description":"12","numberOfSlots":"It\'s HUGE!"}}');
-	// sendJson(USER_CLASS_ID,'{"User": {"username": "ash","password": "34, "Firefighter":{"firefighterId":"7","firstName":"Ash","lastName":"Ketchum","email":"pikachu100@pokeball.com","phone":null,"secondaryPhone":null,"carrier":null}}}');
-	 //sendJson(SCHEDULE_TIMESLOT_CLASS_ID, {'"ScheduleTimeslot": {"scheduleTimeslotId": "2","Timeslot":{"startTime":"2016-04-24 04:00:00","endTime":"2016-04-24 10:00:00","timeslotId":"4"}, "Firefighter":{"firefighterId":"2","firstName":"Ash","lastName":"Ketchum","email":"pikachu100@pokeball.com","phone":null,"secondaryPhone":null,"carrier":null}}}');
-	 //sendJson(AVAILABLE_TIMESLOT_CLASS_ID, {'"AvailableTimeslot": {"availableTimeslotId": "1","Timeslot":{"startTime":"2016-04-24 11:00:00","endTime":"2016-04-24 12:00:00","timeslotId":"16"}, "Firefighter":{"firefighterId":"3","firstName":"Misty","lastName":"Bubbles","email":"misty32453453@staryu.com","phone":null,"secondaryPhone":null,"carrier":null}}}');
-	//sendJson(MY_EVENT_CLASS_ID,);
-	 //sendJson(ASSIGNED_FIREFIGHTER_CLASS_ID,);
-	 //sendJson(ASSIGNED_APPARATUS_CLASS_ID,);
+	 //sendJson(FIREFIGHTER_CLASS_ID, '{"Firefighter":{"firefighterId":"10","firstName":"May","lastName":"Ki","email":"torchic@blaziken.com","phone":null,"secondaryPhone":null,"carrier":null}}');
+	// sendJson(APPARATUS_CLASS_ID, '{"Apparatus":{"appartusId":"1","apparatusName":"Big Truck","description":"12","numberOfSlots":"It\'s HUGE!"}}');
+	// sendJson(USER_CLASS_ID, '{"User":{"username":"b","password":"f","Firefighter":{"firefighterId":"10","firstName":"May","lastName":"Ki","email":"torchic@blaziken.com","phone":null,"secondaryPhone":null,"carrier":null}}}');
+	//sendJson(SCHEDULE_TIMESLOT_CLASS_ID, '{"ScheduleTimeslot":{"scheduleTimeslotId":"2","Timeslot":{"startTime":"2016-04-24 04:00:00","endTime":"2016-04-24 10:00:00","timeslotId":"4"},"Firefighter":{"firefighterId":"2","firstName":"Ash","lastName":"Ketchum","email":"pikachu100@pokeball.com","phone":null,"secondaryPhone":null,"carrier":null}}}');
+	//sendJson(AVAILABLE_TIMESLOT_CLASS_ID, '{"AvailableTimeslot":{"availableTimeslotId":"1","Timeslot":{"startTime":"2016-04-24 11:00:00","endTime":"2016-04-24 12:00:00","timeslotId":"16"},"Firefighter":{"firefighterId":"3","firstName":"Misty","lastName":"Bubbles","email":"misty32453453@staryu.com","phone":null,"secondaryPhone":null,"carrier":null}}}');
+	sendJson(MY_EVENT_CLASS_ID,'{"MyEvent":{"eventId":"2","eventName":"Cake","eventDescription":"Fun!","Timeslot":{"startTime":"2016-04-23 11:00:00","endTime":"2016-04-23 12:00:00","timeslotId":"2"}}}');
+	 sendJson(ASSIGNED_FIREFIGHTER_CLASS_ID,'{"MyEvent":{"assignedFirefighterId":"1","assignedApparatusId":"1","Firefighter":{"firefighterId":"1","firstName":"Kelly","lastName":"Blair","email":null,"phone":null,"secondaryPhone":null,"carrier":"att"},"MyEvent":{"eventId":"1","eventName":"Party","eventDescription":"Fun!","Timeslot":{"startTime":"2016-04-23 11:00:00","endTime":"2016-04-23 12:00:00","timeslotId":"1"}}}}');
+	 sendJson(ASSIGNED_APPARATUS_CLASS_ID,'{"AssignedApparatus":{"assignedApparatusId":"1","apparatus":{"appartusId":"1","apparatusName":"Big Truck","description":"Its HUGE!","numberOfSlots":"12"},"MyEvent":{"eventId":"1","eventName":"Party","eventDescription":"Fun!","Timeslot":{"startTime":"2016-04-23 11:00:00","endTime":"2016-04-23 12:00:00","timeslotId":"1"}}}}');
 }
 
 /*

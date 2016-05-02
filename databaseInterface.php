@@ -539,7 +539,7 @@ function parseApparatus($apparatusJson){
 	return $apparatus;
 }
 function parseScheduleTimeslot($scheduleTimeslotJson){
-	$scheduleTimesslot = ScheduleTimeslot::getScheduleTimeslotFromJson($scheduleTimeslotJson);
+	$scheduleTimeslot = ScheduleTimeslot::getScheduleTimeslotFromJson($scheduleTimeslotJson);
 	return $scheduleTimeslot;
 }
 
@@ -561,6 +561,10 @@ function parseUser($userJson){
 	return $user;
 }
 
+function parseEvent($eventJson){
+	$event = MyEvent::getMyEventFromJson($eventJson);
+	return $event;
+}
 
 $operationId = $_REQUEST["operationId"];
 if($operationId==0)
@@ -600,31 +604,37 @@ else if($operationId==1){
 	}
 	else if ($id==$APPARATUS_CLASS_ID){
 		$apparatus = parseApparatus($json);
-		$success = insertApparatus($apparatus);
+		//$success = insertApparatus($apparatus);
 	}
 	else if ($id==$USER_CLASS_ID){
 		$user = parseUser($json);
-		$success = insertUser($user);
+		echo($user->getSummary());
+		//$success = insertUser($user);
 	}
 	else if ($id==$SCHEDULE_TIMESLOT_CLASS_ID){
 		$scheduleTimeslot = parseScheduleTimeslot($json);
-		$success = insertScheduleTimeslot($scheduleTimeslot);
+		echo($scheduleTimeslot->getSummary());
+		//$success = insertScheduleTimeslot($scheduleTimeslot);
 	}
 	else if ($id==$AVAILABLE_TIMESLOT_CLASS_ID){
 		$availableTimeslot = parseAvailableTimeslot($json);
-		$success = insertAvailableTimeslot($availableTimeslot);
+		echo($availableTimeslot->getSummary());
+		//$success = insertAvailableTimeslot($availableTimeslot);
 	}
 	else if ($id==$MY_EVENT_CLASS_ID){
 		$myEvent = parseEvent($json);
-		$success = insertEvent($myEvent);
+		echo($myEvent->getSummary());
+		//$success = insertEvent($myEvent);
 	}
 	else if ($id==$ASSIGNED_FIREFIGHTER_CLASS_ID){
 		$assignedFirefighter = parseAssignedFirefighter($json);
-		$success = insertFirefighter($assignedFirefighter);
+		echo($assignedFirefighter->getSummary());
+		//$success = insertFirefighter($assignedFirefighter);
 	}
 	else if ($id==$ASSIGNED_APPARATUS_CLASS_ID){
 		$assignedApparatus = parseAssignedApparatus($json);
-		$success = insertAssignedApparatus($assignedApparatus);
+		echo($assignedApparatus->getSummary());
+		//$success = insertAssignedApparatus($assignedApparatus);
 	}
 }
 
