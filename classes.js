@@ -23,7 +23,7 @@ function parseApparatus(json){
 	var numberOfSlots = apparatusOb.numberOfSlots;
 	console.log(apparatusOb);
 	
-	//var apparatus;
+	//var apparatus = new Apparatus(apparatusId, apparatusName, apparatusDescription, numberOfSlots);
 	//return apparatus;
 }
 
@@ -45,7 +45,7 @@ function parseUser(json){
 	var firefighter = new Firefighter(firefighterId, firstName, lastName, email, phone, secondaryPhone, carrier);
 
 	console.log(userOb);
-	//var user;
+	//var user = new User(username, pass, firefighter);
 	//return user;
 }
 
@@ -72,7 +72,7 @@ function parseScheduleTimeslot(json){
 	var firefighter = new Firefighter(firefighterId, firstName, lastName, email, phone, secondaryPhone, carrier);
 
 	console.log(scheduleTimeslotOb);
-	//var scheduleTimeslot;
+	//var scheduleTimeslot = new ScheduleTimeslot(scheduleTimeslotId, firefighter, timeslot);
 	//return scheduleTimeslot;
 }
 function parseAvailableTimeslot(json){
@@ -98,7 +98,7 @@ function parseAvailableTimeslot(json){
 	var firefighter = new Firefighter(firefighterId, firstName, lastName, email, phone, secondaryPhone, carrier);
 
 	console.log(availableTimeslotOb);
-	//var availableTimeslot;
+	//var availableTimeslot = new availableTimeslot(availableTimeslotId, firefighter, timeslot);
 	//return availableTimeslot;
 }
 function parseMyEvent(json){
@@ -116,12 +116,42 @@ function parseMyEvent(json){
 	//var timeslot = new Timeslot(timeslotId, startTime, endTime);
 
 	console.log(myEventOb);
-	//var myEvent;
+	//var myEvent = new Event(eventId, eventName, eventDescription, timeslot);
 	//return myEvent;
 }
 
 function parseAssignedFirefighter(json){
+	var ob = JSON.parse(json);	
+	var assignedFirefighterOb = ob["AssignedFirefighter"];
+	var firefighterOb = assignedFirefighterOb["Firefighter"];
+	var myEventOb = assignedFirefighterOb["MyEvent"];
+	var timeslotOb = myEventOb["Timeslot"];
+	
+	var assignedFirefighterId = assignedFirefighterOb.assignedFirefighterId
+	var apparatusId = assignedFirefighterOb.apparatusId
 
+	var firefighterId = firefighterOb.firefighterId;
+	var firstName = firefighterOb.firstName;
+	var lastName = firefighterOb.lastName;
+	var email = firefighterOb.email;
+	var phone = firefighterOb.phone;
+	var secondaryPhone = firefighterOb.secondaryPhone;
+	var carrier = firefighterOb.carrier;
+	var firefighter = new Firefighter(firefighterId, firstName, lastName, email, phone, secondaryPhone, carrier);
+
+	var endTime = timeslotOb.endTime;
+	var startTime = timeslotOb.startTime;
+	var timeslotId = timeslotOb.timeslotId;
+	//var timeslot = new Timeslot(timeslotId, startTime, endTime);
+	
+	var eventId = myEventOb.eventId
+	var eventName = myEventOb.eventName
+	var eventDescription = myEventOb.eventDescription
+	//var myEvent = new MyEvent(eventId, eventName, eventDescription, timeslot);
+
+	//var assignedFirefighter = new AssignedFireFighter(assignedFirefighterId, apparatusId, firefighter, myEvent);
+	console.log(assignedFirefighterOb);
+	//return assignedFirefighter;
 }
 
 function parseAssignedApparatus(json){
