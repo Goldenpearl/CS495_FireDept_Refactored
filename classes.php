@@ -566,7 +566,7 @@ class AssignedFirefighter{
 		$this->apparatusId.
 		"<br><br> Firefighter:<br>".
 		$this->getFirefighter()->getSummary().
-		"<br><br> Event:";
+		"<br><br> Event:".
 		$this->getEvent()->getSummary().
 		"<br>";
 	}
@@ -633,7 +633,6 @@ class AssignedFirefighter{
 		$eventName = $eventArray["eventName"];
 		$myEvent = new MyEvent($eventId, $eventName, $eventDescription, $timeslot);
 		$assignedFirefighter = new AssignedFirefighter($assignedFirefighterId, $firefighter, $myEvent, $apparatusId);
-		$assignedFirefighter->getSummary();
 		return $assignedFirefighter;
 	}
 	
@@ -643,8 +642,6 @@ class AssignedFirefighter{
 	}
 }
 
-//TEST JSON PARSE
-//TEST JSON ENCODE
 class AssignedApparatus{
 	private $id;
 	private $myEvent;
